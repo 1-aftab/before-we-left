@@ -195,7 +195,7 @@ h2{font-family:var(--serif);font-size:clamp(1.9rem,5vw,3.4rem);font-weight:400;l
       <div class="photo-wrap">
         <div class="photo-card" style="--rot:${rots[(i-1)%rots.length]}">
           <span class="tape one"></span>
-          <img src="assets/${i}.jpg" alt="School memory ${i}" loading="lazy">
+          <img src="./assets/${i}.jpg" alt="School memory ${i}" loading="lazy">
           <span class="photo-label">15 years — memory ${String(i).padStart(2,'0')}</span>
           <span class="tape two"></span>
         </div>
@@ -218,7 +218,7 @@ h2{font-family:var(--serif);font-size:clamp(1.9rem,5vw,3.4rem);font-weight:400;l
     <div class="photo-wrap">
       <div class="photo-card" style="--rot:.4deg">
         <span class="tape one"></span>
-        <img src="assets/outro.jpg" alt="Farewell memory" loading="lazy">
+        <img src="./assets/outro.jpg" alt="Farewell memory" loading="lazy">
         <span class="photo-label">the last frame</span>
         <span class="tape two"></span>
       </div>
@@ -238,17 +238,7 @@ h2{font-family:var(--serif);font-size:clamp(1.9rem,5vw,3.4rem);font-weight:400;l
   },{threshold:.18});
   document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
 
-  const imageObserver=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const img=e.target;
-        img.src=img.dataset.src;
-        img.removeAttribute('data-src');
-        imageObserver.unobserve(img);
-      }
-    });
-  },{rootMargin:'500px 0px'});
-  document.querySelectorAll('img[data-src]').forEach(img=>imageObserver.observe(img));
+
 
   const allPages=[...document.querySelectorAll('.opening,.memory-frame,.interstitial,.archive,.note,.why,.final-photo,.ending')];
   const pageObserver=new IntersectionObserver(entries=>{
