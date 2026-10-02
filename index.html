@@ -47,7 +47,7 @@ section{min-height:100vh;display:flex;flex-direction:column;align-items:center;j
 .memory-frame:nth-child(3n+2) .photo-card{--rot:-.4deg}
 .photo-card{animation:photoIdle 8s ease-in-out infinite alternate}
 @keyframes photoIdle{from{translate:0 0}to{translate:0 -5px}}
-.memory-frame:not(.visible) .photo-card{opacity:0;filter:blur(5px);transform:rotate(var(--rot)) scale(.93) translateY(45px)}
+.memory-frame:not(.visible) .photo-card{opacity:1;filter:none;transform:rotate(var(--rot)) scale(1) translateY(0)}
 .memory-frame.visible .photo-card{opacity:1;filter:none;transform:rotate(var(--rot)) scale(1) translateY(0);transition:opacity .9s ease,filter 1.3s ease,transform 1.2s cubic-bezier(.2,.75,.2,1)}
 .memory-frame.visible:nth-child(3n) .photo-card{animation:develop 1.5s ease both,photoIdle 8s 1.5s ease-in-out infinite alternate}
 @keyframes develop{from{filter:blur(8px) sepia(.3);opacity:.1;transform:rotate(var(--rot)) scale(.88)}to{filter:none;opacity:1;transform:rotate(var(--rot)) scale(1)}}
@@ -237,6 +237,12 @@ h2{font-family:var(--serif);font-size:clamp(1.9rem,5vw,3.4rem);font-weight:400;l
     });
   },{threshold:.18});
   document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+  document.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('error',()=>{
+      img.alt = 'Image could not be loaded: ' + img.getAttribute('src');
+      img.style.opacity = '.35';
+    });
+  });
 
 
 
